@@ -1,0 +1,103 @@
+/* ============================================
+   ChatInput — Fixed Bottom Input Bar
+   ============================================ */
+
+.chat-input-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-md) var(--space-xl);
+  z-index: 100;
+  animation: slideUp 400ms ease-out;
+}
+
+.chat-input-form {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-sm);
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--glass-border);
+  padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-lg);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.chat-input-form:focus-within {
+  border-color: var(--color-sage-green);
+  box-shadow: 0 0 0 3px rgba(166, 187, 141, 0.2);
+}
+
+/* Textarea */
+.chat-input-textarea {
+  flex: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--color-dark-text);
+  padding: var(--space-sm) 0;
+  max-height: 120px;
+}
+
+.chat-input-textarea::placeholder {
+  color: var(--color-sage-green);
+}
+
+.chat-input-textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Send button */
+.chat-input-send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: rgba(60, 98, 85, 0.08);
+  color: var(--color-sage-green);
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.chat-input-send:disabled {
+  cursor: not-allowed;
+}
+
+.chat-input-send--active {
+  background: linear-gradient(135deg, var(--color-deep-green), var(--color-forest-green));
+  color: var(--color-white);
+  box-shadow: 0 2px 12px rgba(60, 98, 85, 0.3);
+}
+
+.chat-input-send--active:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(60, 98, 85, 0.4);
+}
+
+.chat-input-send--active:active {
+  transform: scale(0.95);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .chat-input-wrapper {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .chat-input-form {
+    padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-md);
+  }
+
+  .chat-input-send {
+    width: 40px;
+    height: 40px;
+  }
+}

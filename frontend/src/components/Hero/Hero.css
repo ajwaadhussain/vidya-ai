@@ -1,0 +1,126 @@
+/* ============================================
+   Hero — Branding & Welcome Section
+   ============================================ */
+
+.hero {
+  text-align: center;
+  max-width: 640px;
+  animation: fadeInUp 700ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-forest-green);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-lg);
+  animation: fadeIn 600ms 200ms ease-out both;
+}
+
+.hero-badge svg {
+  color: var(--color-sage-green);
+}
+
+/* Title */
+.hero-title {
+  font-size: var(--font-size-5xl);
+  font-weight: 900;
+  color: var(--color-deep-green);
+  line-height: 1.1;
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  letter-spacing: -0.02em;
+}
+
+.hero-title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-deep-green), var(--color-forest-green));
+  color: var(--color-white);
+  box-shadow: 0 4px 20px rgba(60, 98, 85, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-muted-text);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+  font-weight: 400;
+  animation: fadeIn 600ms 400ms ease-out both;
+}
+
+/* Feature pills */
+.hero-features {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+  animation: fadeIn 600ms 600ms ease-out both;
+}
+
+.hero-feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-forest-green);
+}
+
+.hero-feature-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-sage-green);
+  box-shadow: 0 0 8px rgba(166, 187, 141, 0.5);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: var(--font-size-3xl);
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .hero-title-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .hero-title-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-base);
+  }
+
+  .hero-features {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}

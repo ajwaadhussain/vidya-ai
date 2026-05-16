@@ -1,0 +1,102 @@
+/* ============================================
+   Header — Chat Top Bar (Glassmorphism)
+   ============================================ */
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-xl);
+  border-bottom: 1px solid var(--glass-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  animation: fadeIn 400ms ease-out;
+}
+
+/* Left section */
+.chat-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.chat-header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-deep-green), var(--color-forest-green));
+  color: var(--color-white);
+  box-shadow: 0 2px 12px rgba(60, 98, 85, 0.25);
+}
+
+.chat-header-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header-title {
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  color: var(--color-deep-green);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.chat-header-file {
+  font-size: var(--font-size-xs);
+  color: var(--color-muted-text);
+  font-weight: 500;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Upload button */
+.chat-header-upload {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  background: rgba(60, 98, 85, 0.08);
+  color: var(--color-forest-green);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.chat-header-upload:hover {
+  background: rgba(60, 98, 85, 0.14);
+  border-color: var(--glass-border);
+  transform: translateY(-1px);
+}
+
+.chat-header-upload:active {
+  transform: scale(0.97);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .chat-header {
+    padding: var(--space-md);
+  }
+
+  .chat-header-upload span {
+    display: none;
+  }
+
+  .chat-header-upload {
+    padding: 8px;
+    border-radius: var(--radius-md);
+  }
+
+  .chat-header-file {
+    max-width: 140px;
+  }
+}
