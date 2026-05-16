@@ -4,6 +4,8 @@ from sentence_transformers import SentenceTransformer
 from typing import List
 import hashlib
 import re
+import os
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 # Singleton model (loaded once)
 _model = None
@@ -13,7 +15,7 @@ _collection = None
 def get_model():
     global _model
     if _model is None:
-        _model = SentenceTransformer("all-MiniLM-L6-v2")
+        _model = SentenceTransformer("all-MiniLM-L6-v2", device="cpu")
     return _model
 
 def get_collection(session_id: str):
