@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://vidya-ai-zq1q.onrender.com';
 
 /**
  * Upload a PDF file to the backend for indexing.
