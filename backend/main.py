@@ -152,7 +152,7 @@ async def query_groq(prompt: str):
                     "Content-Type": "application/json"
                 },
                 json={
-                    "model": "gemma2-9b-it",
+                    "model": "llama-3.1-8b-instant",
                     "messages": [
                         {"role": "user", "content": prompt}
                     ],
