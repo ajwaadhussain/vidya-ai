@@ -88,7 +88,7 @@ Answer:"""
     
     # Fall back to HuggingFace if Ollama fails
     if answer is None:
-        answer, source = await query_gemini(prompt)
+        answer, source = await query_groq(prompt)
     
     if answer is None:
         raise HTTPException(status_code=503, detail="No LLM available. Start Ollama locally or set HF_API_TOKEN.")
@@ -137,6 +137,35 @@ async def query_gemini(prompt: str):
             return answer, "gemma"
     except Exception as e:
         print(f"Gemini API error: {e}")
+        return None, None
+
+async def query_groq(prompt: str):
+    try:
+        GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+        if not GROQ_API_KEY:
+            return None, None
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            response = await client.post(
+                "https://api.groq.com/openai/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {GROQ_API_KEY}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": "gemma2-9b-it",
+                    "messages": [
+                        {"role": "user", "content": prompt}
+                    ],
+                    "max_tokens": 512,
+                    "temperature": 0.3
+                }
+            )
+            response.raise_for_status()
+            data = response.json()
+            answer = data["choices"][0]["message"]["content"].strip()
+            return answer, "gemma"
+    except Exception as e:
+        print(f"Groq error: {e}")
         return None, None
 
 # ── Health check ───────────────────────────────────────────────────────────────
