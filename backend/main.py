@@ -124,13 +124,20 @@ async def query_huggingface(prompt: str):
         async with httpx.AsyncClient(timeout=60.0) as client:
             response = await client.post(
                 f"https://api-inference.huggingface.co/models/{HF_MODEL}",
-                headers={"Authorization": f"Bearer {HF_API_TOKEN}"},
+                headers={
+                    "Authorization": f"Bearer {HF_API_TOKEN}",
+                    "Content-Type": "application/json"
+                },
                 json={
                     "inputs": prompt,
                     "parameters": {
                         "max_new_tokens": 512,
                         "temperature": 0.3,
-                        "return_full_text": False
+                        "return_full_text": False,
+                        "do_sample": True
+                    },
+                    "options": {
+                        "wait_for_model": True
                     }
                 }
             )
