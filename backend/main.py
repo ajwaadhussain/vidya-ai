@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 from pipeline import ingest_pdf
 from retriever import retrieve_chunks
 from fastapi.middleware.cors import CORSMiddleware
+import os
+os.environ["SENTENCE_TRANSFORMERS_HOME"] = "/tmp/st_models"
 
 load_dotenv()
 
