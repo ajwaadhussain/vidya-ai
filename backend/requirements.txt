@@ -5,5 +5,4 @@ pymupdf
 chromadb
 python-dotenv
 httpx
-chromadb
-fastembed
+numpy

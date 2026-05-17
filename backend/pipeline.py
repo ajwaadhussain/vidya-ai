@@ -1,6 +1,6 @@
 import fitz
 import chromadb
-from fastembed import TextEmbedding
+import numpy as np
 from typing import List
 import hashlib
 import re
@@ -8,14 +8,7 @@ import os
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-_model = None
 _client = None
-
-def get_model():
-    global _model
-    if _model is None:
-        _model = TextEmbedding("BAAI/bge-small-en-v1.5")
-    return _model
 
 def get_collection(session_id: str):
     global _client
@@ -26,6 +19,19 @@ def get_collection(session_id: str):
         return _client.get_collection(collection_name)
     except:
         return _client.create_collection(collection_name)
+
+def simple_embed(text: str, dim: int = 384) -> List[float]:
+    text = text.lower()
+    np.random.seed(abs(hash(text)) % (2**32))
+    base = np.random.randn(dim)
+    words = text.split()
+    for word in words:
+        np.random.seed(abs(hash(word)) % (2**32))
+        base += np.random.randn(dim) * 0.1
+    norm = np.linalg.norm(base)
+    if norm > 0:
+        base = base / norm
+    return base.tolist()
 
 def extract_text_from_pdf(pdf_bytes: bytes) -> str:
     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
@@ -51,7 +57,6 @@ def chunk_text(text: str, chunk_size: int = 500, overlap: int = 50) -> List[str]
 def ingest_pdf(pdf_bytes: bytes, session_id: str) -> int:
     text = extract_text_from_pdf(pdf_bytes)
     chunks = chunk_text(text)
-    model = get_model()
     collection = get_collection(session_id)
     try:
         existing = collection.get()
@@ -59,7 +64,7 @@ def ingest_pdf(pdf_bytes: bytes, session_id: str) -> int:
             collection.delete(ids=existing["ids"])
     except:
         pass
-    embeddings = list(model.embed(chunks))
+    embeddings = [simple_embed(chunk) for chunk in chunks]
     ids = [hashlib.md5(f"{session_id}_{i}".encode()).hexdigest() for i in range(len(chunks))]
     collection.add(
         documents=chunks,
