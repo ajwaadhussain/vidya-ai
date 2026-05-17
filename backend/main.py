@@ -126,7 +126,7 @@ async def query_gemini(prompt: str):
             return None, None
         async with httpx.AsyncClient(timeout=60.0) as client:
             response = await client.post(
-                f"https://generativelanguage.googleapis.com/v1beta/models/gemma-3-4b-it:generateContent?key={GEMINI_API_KEY}",
+                f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}",
                 json={
                     "contents": [{"parts": [{"text": prompt}]}]
                 }
