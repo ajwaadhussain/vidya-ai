@@ -123,29 +123,24 @@ async def query_huggingface(prompt: str):
     try:
         async with httpx.AsyncClient(timeout=60.0) as client:
             response = await client.post(
-                f"https://api-inference.huggingface.co/models/{HF_MODEL}",
+                "https://api-inference.huggingface.co/models/google/gemma-3-1b-it/v1/chat/completions",
                 headers={
                     "Authorization": f"Bearer {HF_API_TOKEN}",
                     "Content-Type": "application/json"
                 },
                 json={
-                    "inputs": prompt,
-                    "parameters": {
-                        "max_new_tokens": 512,
-                        "temperature": 0.3,
-                        "return_full_text": False,
-                        "do_sample": True
-                    },
-                    "options": {
-                        "wait_for_model": True
-                    }
+                    "model": "google/gemma-3-1b-it",
+                    "messages": [
+                        {"role": "user", "content": prompt}
+                    ],
+                    "max_tokens": 512,
+                    "temperature": 0.3
                 }
             )
             response.raise_for_status()
             data = response.json()
-            if isinstance(data, list) and data:
-                return data[0].get("generated_text", "").strip(), "huggingface"
-            return None, None
+            answer = data["choices"][0]["message"]["content"].strip()
+            return answer, "huggingface"
     except Exception as e:
         print(f"HuggingFace error: {e}")
         return None, None
