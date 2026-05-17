@@ -6,6 +6,7 @@ import os
 from dotenv import load_dotenv
 from pipeline import ingest_pdf
 from retriever import retrieve_chunks
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
@@ -16,6 +17,8 @@ app.add_middleware(
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_credentials=False,
+    expose_headers=["*"],
 )
 
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
