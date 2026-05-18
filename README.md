@@ -1,3 +1,4 @@
+
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
   <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" />
@@ -66,7 +67,7 @@ Vidya AI lets students upload their NCERT textbook PDFs, intelligently parses an
 | 🖥️ **Frontend** | [vidya-ai-nu.vercel.app](https://vidya-ai-nu.vercel.app) |
 | ⚙️ **Backend API** | [vidya-ai-zq1q.onrender.com](https://vidya-ai-zq1q.onrender.com) |
 
-
+https://github.com/user-attachments/assets/e29b7d20-6041-420e-a447-c3d3b5852671
 
 ---
 
